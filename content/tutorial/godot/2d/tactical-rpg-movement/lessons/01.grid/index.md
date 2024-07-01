@@ -68,14 +68,14 @@ class_name Grid
 extends Resource
 
 # The grid's size in rows and columns.
-export var size := Vector2(20, 20)
+@export var size: Vector2 = Vector2(20, 20)
 # The size of a cell in pixels.
-export var cell_size := Vector2(80, 80)
+@export var cell_size: Vector2 = Vector2(80, 80)
 
 # Half of ``cell_size``.
 # We will use this to calculate the center of a grid cell in pixels, on the screen.
 # That's how we can place units in the center of a cell.
-var _half_cell_size = cell_size / 2
+var _half_cell_size: Vector2 = cell_size / 2
 
 
 # Returns the position of a cell's center in pixels.
@@ -97,7 +97,7 @@ func calculate_grid_coordinates(map_position: Vector2) -> Vector2:
 # This method and the following one allow us to ensure the cursor or units can never go past the
 # map's limit.
 func is_within_bounds(cell_coordinates: Vector2) -> bool:
-	var out := cell_coordinates.x >= 0 and cell_coordinates.x < size.x
+	var out: bool = cell_coordinates.x >= 0 and cell_coordinates.x < size.x
 	return out and cell_coordinates.y >= 0 and cell_coordinates.y < size.y
 
 
@@ -107,7 +107,7 @@ func is_within_bounds(cell_coordinates: Vector2) -> bool:
 # limits the vector's length instead of clamping each of the vector's components individually.
 # That's why we need to code a new method.
 func clamp(grid_position: Vector2) -> Vector2:
-	var out := grid_position
+	var out: Vector2 = grid_position
 	out.x = clamp(out.x, 0, size.x - 1.0)
 	out.y = clamp(out.y, 0, size.y - 1.0)
 	return out
